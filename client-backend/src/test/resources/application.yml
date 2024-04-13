@@ -5,6 +5,7 @@ spring:
     active:
 #    - ssl
     - mariadb
+#    - openapi-and-swagger-disabled
 #    - show-sql
 
 server:
@@ -61,7 +62,17 @@ spring:
   sql:
     init:
       mode: always
+---
+spring:
+  config:
+    activate:
+      on-profile: openapi-and-swagger-disabled
 
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
 ---
 spring:
   config:
@@ -69,5 +80,5 @@ spring:
       on-profile: show-sql
 
   jpa:
-      properties:
-        show-sql: true
+    properties:
+      show-sql: true
