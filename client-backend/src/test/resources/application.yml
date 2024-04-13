@@ -1,20 +1,18 @@
 spring:
   application:
     name: client-backend
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
   profiles:
     active:
     - tls
     - mariadb
 #    - openapi-and-swagger-disabled
 #    - show-sql
-
 # Authentication methods: Please always select exactly 1 of the following profiles
-#    - api-key
+    - api-key
 #    - basic-auth
-#    - jwt
-#    - oauth2
 #    - mtls
-
 server:
   port: 8080
 
@@ -92,16 +90,16 @@ spring:
   config:
     activate:
       on-profile: api-key
+
+api:
+  key:
+    header: X-API-KEY
+    secret: secret
 ---
 spring:
   config:
     activate:
       on-profile: basic-auth
----
-spring:
-  config:
-    activate:
-      on-profile: jwt
 ---
 spring:
   config:
