@@ -1,0 +1,22 @@
+version: '1'
+services:
+  client-backend:
+    depends_on:
+      - client-db
+    container_name: client-backend
+    build:
+      context: ./client-backend/.
+    ports:
+      - 8080:8080
+
+  client-db:
+    container_name: client-db
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: changeit
+      MYSQL_DATABASE: my_bank
+      MYSQL_USER: my_bank_master
+      MYSQL_PASSWORD: changeit
+    ports:
+      - 3306:3306
+
