@@ -3,10 +3,17 @@ spring:
     name: client-backend
   profiles:
     active:
-#    - ssl
+    - tls
     - mariadb
 #    - openapi-and-swagger-disabled
 #    - show-sql
+
+# Authentication methods: Please always select exactly 1 of the following profiles
+#    - api-key
+#    - basic-auth
+#    - jwt
+#    - oauth2
+    - mtls
 
 server:
   port: 8080
@@ -23,19 +30,17 @@ logging:
 spring:
   config:
     activate:
-      on-profile: ssl
+      on-profile: tls
 
 server:
   ssl:
     enabled: true
     key-store-type: PKCS12
-    key-store: classpath:keystore/keystore.p12
-    key-store-password: q*UCGLi6mWKxpc_d      # TODO Encrypt password
+    key-store: classpath:cert/client.backend.keystore.p12
+    key-store-password: changeit     # TODO Encrypt password
     protocol: TLS
     enabled-protocols: TLSv1.2,TLSv1.3
-    client-auth: need
-    trust-store: classpath:keystore/truststore.p12
-    trust-store-password: cegrBAoewAL4nyc!     # TODO Encrypt password
+
 ---
 spring:
   config:
@@ -80,5 +85,36 @@ spring:
       on-profile: show-sql
 
   jpa:
-      properties:
-        show-sql: true
+    properties:
+      show-sql: true
+---
+spring:
+  config:
+    activate:
+      on-profile: api-key
+---
+spring:
+  config:
+    activate:
+      on-profile: basic-auth
+---
+spring:
+  config:
+    activate:
+      on-profile: jwt
+---
+spring:
+  config:
+    activate:
+      on-profile: oauth2
+---
+spring:
+  config:
+    activate:
+      on-profile: mtls
+
+server:
+  ssl:
+    client-auth: need
+    trust-store: classpath:cert/client.backend.truststore.p12
+    trust-store-password: changeit     # TODO Encrypt password
