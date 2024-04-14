@@ -178,8 +178,9 @@ public class ClientControllerIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.patch("/client/21")
                         .content(asJsonString(client))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isNoContent())
-                .andExpect(MockMvcResultMatchers.content().string(Matchers.blankOrNullString()));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(21))
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test

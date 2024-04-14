@@ -1,0 +1,711 @@
+{
+	"info": {
+		"_postman_id": "eb70bce4-137d-4f57-b3ad-fdb37d157eea",
+		"name": "bank_client_management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21672308"
+	},
+	"item": [
+		{
+			"name": "auth_disabled",
+			"item": [
+				{
+					"name": "get_all_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ágnes Szilágyi\",\r\n    \"address\": \"Váci út 40, Budapest, Hungary\",\r\n    \"phoneNumber\": \"+3612345678\",\r\n    \"email\": \"agnes.szilagyi@example.com\",\r\n    \"dateOfBirth\": \"1989-10-15\",\r\n    \"identificationNumber\": \"HU5678901234\",\r\n    \"accountNumber\": \"20401234-56781234-90125432\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"accountStatus\": \"ACTIVE\",\r\n    \"riskProfile\": \"MODERATELY_AGGRESSIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Updated Hans Müller\",\r\n    \"address\": \"Updated Hauptstraße 1, Berlin, Germany\",\r\n    \"phoneNumber\": \"+491111111111\",\r\n    \"email\": \"updated.hans.muller@example.com\",\r\n    \"dateOfBirth\": \"2024-04-14\",\r\n    \"identificationNumber\": \"DE1234567890\",\r\n    \"accountNumber\": \"11345678-87654321-98765432\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"accountStatus\": \"ACTIVE\",\r\n    \"riskProfile\": \"MODERATE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api_key_auth",
+			"item": [
+				{
+					"name": "get_all_client",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "secret",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "secret",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/client/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_client",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "secret",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save_client",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "secret",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ágnes Szilágyi\",\r\n    \"address\": \"Váci út 40, Budapest, Hungary\",\r\n    \"phoneNumber\": \"+3612345678\",\r\n    \"email\": \"agnes.szilagyi@example.com\",\r\n    \"dateOfBirth\": \"1989-10-15\",\r\n    \"identificationNumber\": \"HU5678901234\",\r\n    \"accountNumber\": \"20401234-56781234-90125432\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"accountStatus\": \"ACTIVE\",\r\n    \"riskProfile\": \"MODERATELY_AGGRESSIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_client",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "secret",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Updated Hans Müller\",\r\n    \"address\": \"Updated Hauptstraße 1, Berlin, Germany\",\r\n    \"phoneNumber\": \"+491111111111\",\r\n    \"email\": \"updated.hans.muller@example.com\",\r\n    \"dateOfBirth\": \"2024-04-14\",\r\n    \"identificationNumber\": \"DE1234567890\",\r\n    \"accountNumber\": \"11345678-87654321-98765432\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"accountStatus\": \"ACTIVE\",\r\n    \"riskProfile\": \"MODERATE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_client",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "secret",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "basic_auth",
+			"item": [
+				{
+					"name": "get_all_client",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_client",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save_client",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ágnes Szilágyi\",\r\n    \"address\": \"Váci út 40, Budapest, Hungary\",\r\n    \"phoneNumber\": \"+3612345678\",\r\n    \"email\": \"agnes.szilagyi@example.com\",\r\n    \"dateOfBirth\": \"1989-10-15\",\r\n    \"identificationNumber\": \"HU5678901234\",\r\n    \"accountNumber\": \"20401234-56781234-90125432\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"accountStatus\": \"ACTIVE\",\r\n    \"riskProfile\": \"MODERATELY_AGGRESSIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_client",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Updated Hans Müller\",\r\n    \"address\": \"Updated Hauptstraße 1, Berlin, Germany\",\r\n    \"phoneNumber\": \"+491111111111\",\r\n    \"email\": \"updated.hans.muller@example.com\",\r\n    \"dateOfBirth\": \"2024-04-14\",\r\n    \"identificationNumber\": \"DE1234567890\",\r\n    \"accountNumber\": \"11345678-87654321-98765432\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"accountStatus\": \"ACTIVE\",\r\n    \"riskProfile\": \"MODERATE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_client",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mtls",
+			"item": [
+				{
+					"name": "get_all_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:8080/client/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:8080/client/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ágnes Szilágyi\",\r\n    \"address\": \"Váci út 40, Budapest, Hungary\",\r\n    \"phoneNumber\": \"+3612345678\",\r\n    \"email\": \"agnes.szilagyi@example.com\",\r\n    \"dateOfBirth\": \"1989-10-15\",\r\n    \"identificationNumber\": \"HU5678901234\",\r\n    \"accountNumber\": \"20401234-56781234-90125432\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"accountStatus\": \"ACTIVE\",\r\n    \"riskProfile\": \"MODERATELY_AGGRESSIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8080/client",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Updated Hans Müller\",\r\n    \"address\": \"Updated Hauptstraße 1, Berlin, Germany\",\r\n    \"phoneNumber\": \"+491111111111\",\r\n    \"email\": \"updated.hans.muller@example.com\",\r\n    \"dateOfBirth\": \"2024-04-14\",\r\n    \"identificationNumber\": \"DE1234567890\",\r\n    \"accountNumber\": \"11345678-87654321-98765432\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"accountStatus\": \"ACTIVE\",\r\n    \"riskProfile\": \"MODERATE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8080/client/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:8080/client/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

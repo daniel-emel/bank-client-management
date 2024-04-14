@@ -11,8 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-// TODO add proper security mechanism
-
 @Profile("!auth-disabled && !basic-auth && api-key")
 @AllArgsConstructor
 @EnableWebSecurity

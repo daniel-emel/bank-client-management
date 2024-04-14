@@ -3,16 +3,16 @@ spring:
     name: client-backend
   profiles:
     active:
-#    - tls
     - mariadb
 #    - openapi-and-swagger-disabled
 #    - show-sql
 # Authentication modes:
-#  Please always select exactly 1 from the auth-disabled, basic-auth and api-key profiles to avoid potential conflicts caused by having multiple security configs
-#    - auth-disabled
-    - basic-auth
+#    - tls
+#    - mtls             # To use mtls the tls profile must be active!
+#  Please always select exactly 1 from the [auth-disabled, basic-auth and api-key] profiles to avoid potential conflicts caused by having multiple security configs
+    - auth-disabled
+#    - basic-auth
 #    - api-key
-#    - mtls
 
 
 server:
@@ -56,7 +56,7 @@ spring:
     username: my_bank_master
     password: changeit           # TODO Encrypt password
   jpa:
-    generate-ddl: true          # TODO Check it
+    generate-ddl: true
     defer-datasource-initialization: true
     properties:
       hibernate:
@@ -98,7 +98,7 @@ spring:
 
 api:
   key:
-    header: X-API-KEY
+    header: x-api-key
     secret: secret
 ---
 spring:

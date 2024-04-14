@@ -22,10 +22,12 @@ public class BasicAuthSecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
         );
         return http.build();
     }

@@ -1,0 +1,283 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "OpenAPI definition",
+      "version": "v0"
+    },
+    "servers": [
+      {
+        "url": "https://server.com",
+        "description": "New server"
+      },
+      {
+        "url": "http://localhost:8080",
+        "description": "Generated server url"
+      }
+    ],
+    "paths": {
+      "/client": {
+        "post": {
+          "tags": [
+            "client-controller"
+          ],
+          "operationId": "saveClient",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Client"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/client/{id}": {
+        "get": {
+          "tags": [
+            "client-controller"
+          ],
+          "operationId": "getClient",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Client"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "client-controller"
+          ],
+          "operationId": "deleteClient",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Client"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "client-controller"
+          ],
+          "operationId": "updateClient",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Client"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/client/all": {
+        "get": {
+          "tags": [
+            "client-controller"
+          ],
+          "operationId": "getAllClients",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/client/age/between-18-and-40": {
+        "get": {
+          "tags": [
+            "client-controller"
+          ],
+          "operationId": "getClientsBetween18and40",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/client/age/average": {
+        "get": {
+          "tags": [
+            "client-controller"
+          ],
+          "operationId": "getAverageClientAge",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Client": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "name": {
+              "maxLength": 100,
+              "minLength": 0,
+              "type": "string"
+            },
+            "address": {
+              "maxLength": 200,
+              "minLength": 0,
+              "type": "string"
+            },
+            "phoneNumber": {
+              "pattern": "^\\+[0-9]{7,15}$",
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "dateOfBirth": {
+              "type": "string",
+              "format": "date"
+            },
+            "identificationNumber": {
+              "pattern": "[A-Za-z0-9]{1,20}",
+              "type": "string"
+            },
+            "accountNumber": {
+              "pattern": "^[0-9]{8}-[0-9]{8}-[0-9]{8}$",
+              "type": "string"
+            },
+            "accountType": {
+              "type": "string",
+              "enum": [
+                "SAVINGS",
+                "CHECKING",
+                "INVESTMENT"
+              ]
+            },
+            "accountStatus": {
+              "type": "string",
+              "enum": [
+                "ACTIVE",
+                "CLOSED",
+                "DORMANT"
+              ]
+            },
+            "riskProfile": {
+              "type": "string",
+              "enum": [
+                "CONSERVATIVE",
+                "MODERATELY_CONSERVATIVE",
+                "MODERATE",
+                "MODERATELY_AGGRESSIVE",
+                "AGGRESSIVE"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }

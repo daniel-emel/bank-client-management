@@ -85,8 +85,7 @@ public class ClientController {
     @PatchMapping("/client/{id}")
     ResponseEntity<Client> updateClient(@Valid @RequestBody Client client, @PathVariable Long id) {
         log.info("updateClient({},{})", client, id);
-        clientService.updateClient(client, id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(clientService.updateClient(client, id),HttpStatus.OK);
     }
 
     /**
