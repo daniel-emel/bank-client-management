@@ -64,7 +64,7 @@ public class ClientService {
      * @param client The client to be saved
      * @return The saved client
      */
-    public Client createClient(Client client) {
+    public Client saveClient(Client client) {
         log.info("createClient({})", client);
         return clientRepository.save(client);
     }
@@ -75,9 +75,9 @@ public class ClientService {
      * @param id The ID of the client to be updated.
      * @throws ClientNotFoundException Throws exception if client not found.
      */
-    public void updateClient(Client updateClient, Long id) throws ClientNotFoundException {
+    public Client updateClient(Client updateClient, Long id) throws ClientNotFoundException {
         log.info("updateClient({}, {})", updateClient, id);
-        clientRepository.findById(id)
+        return clientRepository.findById(id)
                 .map(client -> {
                     // Mapping can become particularly long for entities with many fields. Implementing a mapper solution can improve this.
                     client.setName(updateClient.getName());
