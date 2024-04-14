@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 // TODO add proper security mechanism
 
-@Profile("api-key")
+@Profile("!auth-disabled && !basic-auth && api-key")
 @AllArgsConstructor
 @EnableWebSecurity
 @Configuration

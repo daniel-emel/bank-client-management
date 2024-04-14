@@ -1,17 +1,17 @@
 spring:
   application:
     name: client-backend
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
   profiles:
     active:
 #    - tls
     - mariadb
 #    - openapi-and-swagger-disabled
 #    - show-sql
-# Authentication methods: Please always select exactly 1 of the following profiles to avoid conflicts
-    - api-key
-#    - basic-auth
+# Authentication modes:
+#  Please always select exactly 1 from the auth-disabled, basic-auth and api-key profiles to avoid potential conflicts caused by having multiple security configs
+#    - auth-disabled
+    - basic-auth
+#    - api-key
 #    - mtls
 
 
@@ -62,11 +62,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MariaDBDialect
         ddl-auto: create-drop
-#        connection:
-#          characterEncoding: utf-8
-#          CharSet: utf-8
-#          useUnicode: true
-#          collationConnection: utf8_general_ci
   sql:
     init:
       mode: always
@@ -94,17 +89,17 @@ spring:
 spring:
   config:
     activate:
+      on-profile: basic-auth
+---
+spring:
+  config:
+    activate:
       on-profile: api-key
 
 api:
   key:
     header: X-API-KEY
     secret: secret
----
-spring:
-  config:
-    activate:
-      on-profile: basic-auth
 ---
 spring:
   config:

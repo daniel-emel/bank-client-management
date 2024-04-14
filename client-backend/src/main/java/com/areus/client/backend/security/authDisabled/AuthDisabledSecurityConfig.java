@@ -1,4 +1,4 @@
-package com.areus.client.backend.security.noAuth;
+package com.areus.client.backend.security.authDisabled;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,10 +8,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Profile("!api-key && !basic-auth")
+@Profile("auth-disabled && !basic-auth && !api-key")
 @EnableWebSecurity
 @Configuration
-public class NoAuthSecurityConfig {
+public class AuthDisabledSecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
