@@ -26,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
 
-@ToString
+@ToString // The toString() method should be used with caution on entities, as it can easily lead to secret leaks in production environments
 @Builder @Validated
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
@@ -47,23 +47,23 @@ public class Client {
     @Column(name = "address")
     private String address;
 
-    @Pattern(regexp = "^\\+[0-9]{7,15}$")
+    @Pattern(regexp = "^\\+[0-9]{7,15}$", message = "Invalid phone number.")
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Email
+    @Email(message = "Invalid email address.")
     @Column(name = "email", nullable = false)
     private String email;
 
-    @DateOfBirth
+    @DateOfBirth(message = "Invalid date of birth.")
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
 
-    @Pattern(regexp = "")
+    @Pattern(regexp = "[A-Za-z0-9]{1,20}", message = "Invalid identification number.")
     @Column(name = "identification_number", nullable = false)
     private String identificationNumber;
 
-    @Pattern(regexp = "^[0-9]{4}-[0-9]{4}-[0-9]{4}$")
+    @Pattern(regexp = "^[0-9]{4}-[0-9]{4}-[0-9]{4}$", message = "Invalid account number.")
     @Column(name = "account_number", nullable = false)
     private String accountNumber;
 

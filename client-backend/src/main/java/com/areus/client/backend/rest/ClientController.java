@@ -1,9 +1,11 @@
 package com.areus.client.backend.rest;
 
+import com.areus.client.backend.exception.ClientNotFoundException;
 import com.areus.client.backend.jpa.entity.Client;
 import com.areus.client.backend.service.ClientService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 // TODO add exception handling for methods
 // TODO update javadoc with exception handling
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 public class ClientController {
@@ -30,6 +34,7 @@ public class ClientController {
      */
     @GetMapping("/client/all")
     ResponseEntity<List<Client>> getAllClients() {
+        log.info("getAllClients()");
         return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
     }
 
@@ -39,6 +44,7 @@ public class ClientController {
      */
     @GetMapping("/client/{id}")
     ResponseEntity<Client> getClient(@PathVariable Long id) {
+        log.info("getClient({})", id);
         return new ResponseEntity<>(clientService.getClient(id), HttpStatus.OK);
     }
 
@@ -47,6 +53,7 @@ public class ClientController {
      */
     @GetMapping("/client/age/between-18-and-40")
     ResponseEntity<List<Client>> getClientsBetween18and40(){
+        log.info("getClientsBetween18and40()");
         return new ResponseEntity<>(clientService.getClientBetween18and40(), HttpStatus.OK);
     }
 
@@ -55,6 +62,7 @@ public class ClientController {
      */
     @GetMapping("/client/age/average")
     ResponseEntity<Integer> getAverageClientAge() {
+        log.info("getAverageClientAge()");
         return new ResponseEntity<>(clientService.getAverageClientAge(), HttpStatus.OK);
     }
 
@@ -65,6 +73,7 @@ public class ClientController {
      */
     @PostMapping("/client")
     ResponseEntity<Client> createClient(@Valid @RequestBody Client client) {
+        log.info("createClient({})", client);
         return new ResponseEntity<>(clientService.createClient(client), HttpStatus.CREATED);
     }
 
@@ -79,6 +88,7 @@ public class ClientController {
      */
     @PatchMapping("/client/{id}")
     ResponseEntity<Client> updateClient(@Valid @RequestBody Client client, @PathVariable Long id) {
+        log.info("updateClient({},{})", client, id);
         clientService.updateClient(client, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -90,6 +100,7 @@ public class ClientController {
      */
     @DeleteMapping("/client/{id}")
     ResponseEntity<Client> deleteClient(@PathVariable Long id) {
+        log.info("deleteClient({})", id);
         clientService.deleteClient(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
