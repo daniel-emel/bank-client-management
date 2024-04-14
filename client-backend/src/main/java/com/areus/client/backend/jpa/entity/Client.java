@@ -63,7 +63,7 @@ public class Client {
     @Column(name = "identification_number", nullable = false)
     private String identificationNumber;
 
-    @Pattern(regexp = "^[0-9]{4}-[0-9]{4}-[0-9]{4}$", message = "Invalid account number.")
+    @Pattern(regexp = "^[0-9]{8}-[0-9]{8}-[0-9]{8}$", message = "Invalid account number.")
     @Column(name = "account_number", nullable = false)
     private String accountNumber;
 

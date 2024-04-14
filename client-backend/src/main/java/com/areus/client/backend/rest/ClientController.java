@@ -1,6 +1,5 @@
 package com.areus.client.backend.rest;
 
-import com.areus.client.backend.exception.ClientNotFoundException;
 import com.areus.client.backend.jpa.entity.Client;
 import com.areus.client.backend.service.ClientService;
 import jakarta.validation.Valid;
@@ -15,12 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
-// TODO add exception handling for methods
-// TODO update javadoc with exception handling
 
 @Slf4j
 @AllArgsConstructor
@@ -30,10 +25,11 @@ public class ClientController {
     ClientService clientService;
 
     /**
+     * This controller method was made public (unlike the others), so that I can demonstrate the use of Mockito in the tests.
      * @return The list of the clients
      */
     @GetMapping("/client/all")
-    ResponseEntity<List<Client>> getAllClients() {
+    public ResponseEntity<List<Client>> getAllClients() {
         log.info("getAllClients()");
         return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
     }

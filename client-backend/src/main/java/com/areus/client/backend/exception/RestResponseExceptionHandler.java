@@ -27,6 +27,6 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
         for (var err : ex.getBindingResult().getAllErrors())
             errors.put(((FieldError) err).getField(), err.getDefaultMessage());
 
-        return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 }
