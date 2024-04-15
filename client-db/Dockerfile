@@ -1,2 +1,8 @@
 FROM mariadb:latest
+
+ENV MYSQL_ROOT_PASSWORD changeit
+ENV MYSQL_DATABASE my_bank
+ENV MYSQL_USER my_bank_master
+ENV MYSQL_PASSWORD changeit
+
 EXPOSE 3306

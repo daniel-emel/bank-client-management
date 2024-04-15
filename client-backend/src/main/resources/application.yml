@@ -8,7 +8,7 @@ spring:
 #    - show-sql
 # Authentication modes:
 #    - tls
-#    - mtls             # To use mtls the tls profile must be active!
+#    - mtls             # To use mtls the tls profile must be active! mTLS is an extension of TLS, so it depends on it.
 #  Please always select exactly 1 from the [auth-disabled, basic-auth and api-key] profiles to avoid potential conflicts caused by having multiple security configs
     - auth-disabled
 #    - basic-auth
