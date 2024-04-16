@@ -111,6 +111,22 @@ public class ClientControllerIntegrationTest {
     }
 
     @Test
+    public void testGetAverageClientAge() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/client/age/average"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
+    }
+
+    @Test
+    public void testGetClientsBetween18and40() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/client/age/between-18-and-40"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
+    }
+
+    @Test
     public void testAddValidClient() throws Exception {
         Client client = Client.builder()
                 .id(10L)
@@ -182,6 +198,8 @@ public class ClientControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(21))
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
+
+
 
     @Test
     public void testPatchInvalidClient() throws Exception {

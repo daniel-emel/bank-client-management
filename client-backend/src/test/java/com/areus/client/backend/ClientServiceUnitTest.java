@@ -35,11 +35,11 @@ public class ClientServiceUnitTest {
     @Mock
     private ClientRepository clientRepository;
 
-    Client client;
+    Client client1, client2, client17YearsOld, client18YearsOld, client30YearsOld, client40YearsOld, client41YearsOld;
 
     @BeforeEach
     public void setup(){
-        client = Client.builder()
+        client1 = Client.builder()
                 .id(1L)
                 .name("Giovanni Rossi")
                 .address("Via Roma 3, Rome, Italy")
@@ -52,28 +52,8 @@ public class ClientServiceUnitTest {
                 .accountStatus(AccountStatus.ACTIVE)
                 .riskProfile(RiskProfile.CONSERVATIVE)
                 .build();
-    }
 
-    @DisplayName("JUnit test for saveClient() method")
-    @Test
-    public void givenClientObject_whenSaveClient_thenReturnClientObject(){
-        // given - precondition or setup
-        given(clientRepository.findById(client.getId())).willReturn(Optional.empty());
-
-        given(clientRepository.save(client)).willReturn(client);
-
-        // when -  action or the behaviour to test
-        Client savedClient = clientService.saveClient(client);
-
-        // then - verify the output
-        assertThat(savedClient).isNotNull();
-    }
-
-    @DisplayName("JUnit test for getAllClients() method")
-    @Test
-    public void givenClientsList_whenGetAllClients_thenReturnClientsList(){
-        // given - precondition or setup
-        Client client2 =  Client.builder()
+        client2 =  Client.builder()
                 .name("Maria García")
                 .address("Calle Principal 4, Madrid, Spain")
                 .phoneNumber("+34123456789")
@@ -86,7 +66,77 @@ public class ClientServiceUnitTest {
                 .riskProfile(RiskProfile.MODERATELY_CONSERVATIVE)
                 .build();
 
-        given(clientRepository.findAll()).willReturn(List.of(client,client2));
+        client17YearsOld = Client.builder()
+                .name("Maria García")
+                .address("Calle Principal 4, Madrid, Spain")
+                .phoneNumber("+34123456789")
+                .email("maria.garcia@example.com")
+                .dateOfBirth(LocalDate.of(2007,4,1))
+                .identificationNumber("ES2345678901")
+                .accountNumber("45678901-54321098-65432109")
+                .accountType(AccountType.CHECKING)
+                .accountStatus(AccountStatus.ACTIVE)
+                .riskProfile(RiskProfile.MODERATELY_CONSERVATIVE)
+                .build();
+
+        client18YearsOld =  Client.builder()
+                .name("Maria García")
+                .address("Calle Principal 4, Madrid, Spain")
+                .phoneNumber("+34123456789")
+                .email("maria.garcia@example.com")
+                .dateOfBirth(LocalDate.of(2006,4,1))
+                .identificationNumber("ES2345678901")
+                .accountNumber("45678901-54321098-65432109")
+                .accountType(AccountType.CHECKING)
+                .accountStatus(AccountStatus.ACTIVE)
+                .riskProfile(RiskProfile.MODERATELY_CONSERVATIVE)
+                .build();
+
+        client30YearsOld =  Client.builder()
+                .name("Maria García")
+                .address("Calle Principal 4, Madrid, Spain")
+                .phoneNumber("+34123456789")
+                .email("maria.garcia@example.com")
+                .dateOfBirth(LocalDate.of(1994,4,1))
+                .identificationNumber("ES2345678901")
+                .accountNumber("45678901-54321098-65432109")
+                .accountType(AccountType.CHECKING)
+                .accountStatus(AccountStatus.ACTIVE)
+                .riskProfile(RiskProfile.MODERATELY_CONSERVATIVE)
+                .build();
+
+        client40YearsOld = Client.builder()
+                .name("Maria García")
+                .address("Calle Principal 4, Madrid, Spain")
+                .phoneNumber("+34123456789")
+                .email("maria.garcia@example.com")
+                .dateOfBirth(LocalDate.of(1984,4,1))
+                .identificationNumber("ES2345678901")
+                .accountNumber("45678901-54321098-65432109")
+                .accountType(AccountType.CHECKING)
+                .accountStatus(AccountStatus.ACTIVE)
+                .riskProfile(RiskProfile.MODERATELY_CONSERVATIVE)
+                .build();
+
+        client41YearsOld = Client.builder()
+                .name("Maria García")
+                .address("Calle Principal 4, Madrid, Spain")
+                .phoneNumber("+34123456789")
+                .email("maria.garcia@example.com")
+                .dateOfBirth(LocalDate.of(1983,4,1))
+                .identificationNumber("ES2345678901")
+                .accountNumber("45678901-54321098-65432109")
+                .accountType(AccountType.CHECKING)
+                .accountStatus(AccountStatus.ACTIVE)
+                .riskProfile(RiskProfile.MODERATELY_CONSERVATIVE)
+                .build();
+    }
+
+    @DisplayName("JUnit test for getAllClients() method")
+    @Test
+    public void givenClientsList_whenGetAllClients_thenReturnClientsList(){
+        // given - precondition or setup
+        given(clientRepository.findAll()).willReturn(List.of(client1,client2));
 
         // when -  action or the behaviour to test
         List<Client> clientList = clientService.getAllClients();
@@ -100,28 +150,69 @@ public class ClientServiceUnitTest {
     @Test
     public void givenClientId_whenGetClient_thenReturnClientObject(){
         // given - precondition or setup
-        given(clientRepository.findById(1L)).willReturn(Optional.of(client));
+        given(clientRepository.findById(1L)).willReturn(Optional.of(client1));
 
         // when -  action or the behaviour to test
-        Client savedClient = clientService.getClient(client.getId());
+        Client savedClient = clientService.getClient(client1.getId());
 
         // then - verify the output
         assertThat(savedClient).isNotNull();
 
     }
 
+    @DisplayName("JUnit test for getClientBetween18and40() method")
+    @Test
+    public void givenNothing_getClientsBetween18and40_thenReturnClientsBetween18and40(){
+        // given - precondition or setup
+        given(clientRepository.findAll()).willReturn(List.of(client17YearsOld, client18YearsOld, client30YearsOld, client40YearsOld, client41YearsOld));
+
+        // when -  action or the behaviour to test
+        List<Client> clients = clientService.getClientBetween18and40();
+
+        // then - verify the output
+        assertThat(clients).isEqualTo(List.of(client18YearsOld, client30YearsOld, client40YearsOld));
+    }
+
+    @DisplayName("JUnit test for getAverageClientAge() method")
+    @Test
+    public void givenNothing_whenGetAverageClientAge_thenReturnAverageClientAge(){
+        // given - precondition or setup
+        given(clientRepository.getAverageClientAge()).willReturn(40);
+
+        // when -  action or the behaviour to test
+        Integer averageClientAge = clientService.getAverageClientAge();
+
+        // then - verify the output
+        assertThat(averageClientAge).isEqualTo(40);
+    }
+
+    @DisplayName("JUnit test for saveClient() method")
+    @Test
+    public void givenClientObject_whenSaveClient_thenReturnClientObject(){
+        // given - precondition or setup
+        given(clientRepository.findById(client1.getId())).willReturn(Optional.empty());
+
+        given(clientRepository.save(client1)).willReturn(client1);
+
+        // when -  action or the behaviour to test
+        Client savedClient = clientService.saveClient(client1);
+
+        // then - verify the output
+        assertThat(savedClient).isNotNull();
+    }
+
     @DisplayName("JUnit test for updateClient() method")
     @Test
     public void givenClientObject_whenUpdateClient_thenReturnUpdatedClient(){
         // given - precondition or setup
-        given(clientRepository.save(client)).willReturn(client);
-        given(clientRepository.findById(client.getId())).willReturn(Optional.of(client));
+        given(clientRepository.save(client1)).willReturn(client1);
+        given(clientRepository.findById(client1.getId())).willReturn(Optional.of(client1));
 
-        client.setName("Test Test");
-        client.setEmail("test@example.com");
+        client1.setName("Test Test");
+        client1.setEmail("test@example.com");
 
         // when -  action or the behaviour to test
-        Client updatedClient = clientService.updateClient(client, client.getId());
+        Client updatedClient = clientService.updateClient(client1, client1.getId());
 
         // then - verify the output
         assertThat(updatedClient.getName()).isEqualTo("Test Test");
